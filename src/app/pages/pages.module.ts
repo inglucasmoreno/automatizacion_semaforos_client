@@ -5,12 +5,14 @@ import { PagesComponent } from './pages.component';
 import { RouterModule } from '@angular/router';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { SharedModule } from '../shared/shared.module';
+import { SemaforosComponent } from './semaforos/semaforos.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     PagesComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    SemaforosComponent
   ],
   imports: [
     CommonModule,

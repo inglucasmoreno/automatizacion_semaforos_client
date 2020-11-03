@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { SemaforosComponent } from './semaforos/semaforos.component';
 
 const routes: Routes = [
     {
@@ -10,7 +11,8 @@ const routes: Routes = [
         component: PagesComponent,
         children: [
             { path: '', component: DashboardComponent },
-            { path: 'usuarios', component: UsuariosComponent }
+            { path: 'usuarios', component: UsuariosComponent },
+            { path: 'semaforos', component: SemaforosComponent }
         ]
     },
 ];
