@@ -1,4 +1,6 @@
+import { identifierModuleUrl } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { UsuariosService } from '../../services/usuarios.service';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  showMenu = true;
+
+  constructor(private usuariosService: UsuariosService) { }
 
   ngOnInit(): void {
+  }
+
+  cerrarSesion(): void{
+    this.usuariosService.logout();
+  }
+
+  toggleMenu(): void{
+    this.showMenu ? this.showMenu = false : this.showMenu = true;
   }
 
 }
