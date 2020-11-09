@@ -1,3 +1,8 @@
-<div class="container-fluid">
-    <p> Contenido de tablero </p>
+<div class="md:flex">
+    <div (click)="cambiarEstado(semaforo)" *ngFor="let semaforo of semaforos" class="md:w-1/4">
+        <div [ngClass]="{'border-green-500': !semaforo.intermitente, 'border-red-500': semaforo.intermitente}" class="flex items-center justify-between border-t-8 bg-white rounded shadow p-6 w-11/12 mr-auto ml-auto mt-4 cursor-pointer">
+            <span class="font-semibold block"> {{ semaforo.descripcion }} </span>
+            <span [ngClass]="{'bg-green-500': !semaforo.intermitente, 'bg-red-500': semaforo.intermitente}" class="p-1 rounded text-sm text-white"> {{ semaforo.intermitente ? 'Intermitente' : 'Funcionando' }} </span>        
+        </div>
+    </div>
 </div>

@@ -8,10 +8,10 @@ interface semaforoUser {
 
 export class Semaforo {
     constructor(
-        public id: string,
+        public _id: string,
         public codigo: string,
-        public descripcion: string,
-        public usuario: semaforoUser,
+        public descripcion?: string,
+        public usuario?: semaforoUser,
         public intermitente?: boolean,
         public activo?: boolean
     ){}
