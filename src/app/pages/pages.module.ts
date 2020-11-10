@@ -7,18 +7,24 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PagesComponent } from './pages.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { SemaforosComponent } from './semaforos/semaforos.component';
+import { NuevoSemaforoComponent } from './semaforos/nuevo-semaforo.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { EditarSemaforoComponent } from './semaforos/editar-semaforo.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     PagesComponent,
     UsuariosComponent,
-    SemaforosComponent
+    SemaforosComponent,
+    NuevoSemaforoComponent,
+    EditarSemaforoComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class PagesModule { }

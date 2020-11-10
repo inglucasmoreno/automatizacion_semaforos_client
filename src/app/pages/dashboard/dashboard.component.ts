@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class DashboardComponent implements OnInit {
 
-  semaforos: Semaforo[];
+  public semaforos: Semaforo[];
 
   constructor(private semaforosService: SemaforosService) { }
 
@@ -20,8 +20,10 @@ export class DashboardComponent implements OnInit {
   }
 
   listarSemaforos(): void{
-    this.semaforosService.listarSemaforos().subscribe( semaforos => {
-      this.semaforos = semaforos;
+    this.semaforosService.listarSemaforos().subscribe( resp => {
+      console.log(resp);
+      this.semaforos = resp.semaforos.filter(semaforos => semaforos.activo === true);
+      console.log(this.semaforos);
     });
   }
 
@@ -50,6 +52,11 @@ export class DashboardComponent implements OnInit {
         });
       }
     });
+  }
+
+  filtradoTexto(): void{
+
+
   }
 
 }

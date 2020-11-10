@@ -26,8 +26,15 @@ export class LoginComponent implements OnInit {
 
   login(): void | boolean{
 
-    if(this.loginForm.value.dni === '' || this.loginForm.value.password === ''){
-      Swal.fire('Error', 'Se deben completar todos los campos', 'error');
+    const {dni, password} = this.loginForm.value; 
+
+    if (!dni.trim() || !password.trim){
+      Swal.fire({
+        icon: 'info',
+        title: 'Información',
+        text: 'Se deben completar todos los campos',
+        confirmButtonText: 'Entendido'
+      });
       return false;
     }
 
