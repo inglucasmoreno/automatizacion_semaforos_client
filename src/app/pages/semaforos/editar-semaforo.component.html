@@ -11,18 +11,41 @@
                   autocomplete="off"
                   [formGroup]="semaforoForm"
                   (submit)="actualizarSemaforo()">
-                <div>
-                    <label class="font-semibold text-gray-700 block" for=""> Codigo </label>
-                    <input type="text" 
+                <div class="border p-2 shadow bg-gray-200 rounded cursor-pointer text-center">
+                    <span class="font-semibold text-gray-600"> Semáforo creado por <span class="text-blue-500"> {{ semaforo.usuario ? semaforo.usuario.nombre : null }} {{ semaforo.usuario ? semaforo.usuario.apellido : null }} </span> </span>
+                </div>
+                <div class="mt-2">
+                    <label class="font-semibold text-gray-700 block" for="codigo"> Codigo </label>
+                    <input type="text"
+                           id="codigo" 
                            class="shadow w-1/2 block p-1 mt-2 rounded border border-gray-400"
                            formControlName="codigo"
                            placeholder="Identificador (3 digitos)">
                 </div>
                 <div>
-                    <label class="font-semibold text-gray-700 block mt-4" for=""> Descripción </label>
-                    <input type="text" 
+                    <label class="font-semibold text-gray-700 block mt-4" for="descripcion"> Descripción </label>
+                    <input type="text"
+                           id="descripcion" 
                            class="shadow w-full block p-1 mt-2 rounded border border-gray-400"
                            formControlName="descripcion">
+                </div>
+                <div class="flex mt-4">
+                    <div class="mr-5">
+                        <label class="font-semibold text-gray-700 block mt-4" for=""> Estado </label>
+                        <select formControlName="intermitente"
+                                class="shadow border p-1 mt-2">
+                            <option value=true> Intermitente </option>
+                            <option value=false> Funcionando </option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="font-semibold text-gray-700 block mt-4" for=""> ¿Activo? </label>
+                        <select formControlName="activo"
+                                class="shadow border p-1 mt-2">
+                            <option value=true> Activo </option>
+                            <option value=false> Inactivo </option>
+                        </select>
+                    </div>
                 </div>
                 <div class="flex">
                     <button class="block w-2/3 mt-6 bg-blue-500 text-white p-2 rounded focus:outline-none"> 

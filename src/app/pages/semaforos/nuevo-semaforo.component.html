@@ -12,15 +12,17 @@
                   [formGroup]="semaforoForm"
                   (submit)="nuevoSemaforo()">
                 <div>
-                    <label class="font-semibold text-gray-700 block" for=""> Codigo </label>
+                    <label class="font-semibold text-gray-700 block" for="codigo"> Codigo </label>
                     <input type="text" 
+                           id="codigo"
                            class="shadow w-1/2 block p-1 mt-2 rounded border border-gray-400"
                            formControlName="codigo"
                            placeholder="Identificador (3 digitos)">
                 </div>
                 <div>
-                    <label class="font-semibold text-gray-700 block mt-4" for=""> Descripción </label>
-                    <input type="text" 
+                    <label class="font-semibold text-gray-700 block mt-4" for="descripcion"> Descripción </label>
+                    <input type="text"
+                           id="descripcion" 
                            class="shadow w-full block p-1 mt-2 rounded border border-gray-400"
                            formControlName="descripcion">
                 </div>
