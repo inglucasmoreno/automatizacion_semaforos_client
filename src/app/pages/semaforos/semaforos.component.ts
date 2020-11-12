@@ -47,11 +47,11 @@ export class SemaforosComponent implements OnInit {
     }
     this.semaforosService.actualizarSemaforo(_id, data).subscribe(resp => {
       this.listarSemaforos();
-    }, (err) => {
+    }, ({error}) => {
       Swal.fire({
         icon: 'error',
-        title: 'error',
-        text: err.error.msg,
+        title: 'Error',
+        text: error.msg,
         confirmButtonText: 'Entendido'
       });
     });

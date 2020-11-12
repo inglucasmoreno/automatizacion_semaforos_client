@@ -33,6 +33,24 @@ export class UsuariosService {
     this.router.navigateByUrl('login');
   }
 
+  listarUsuarios(): Observable<any>{
+    return this.http.get(`${base_url}/usuarios`, { headers: {
+      'x-token': localStorage.getItem('token')
+    }});
+  }
+
+  nuevoUsuario(data): Observable<any>{
+    return this.http.post(`${base_url}/usuarios`, data, {headers: {
+      'x-token': localStorage.getItem('token')
+    }});
+  }
+
+  actualizarUsuario(id, data): Observable<any>{
+    return this.http.put(`${base_url}/usuarios/${id}`, data, { headers: {
+      'x-token': localStorage.getItem('token')
+    }});
+  }
+
   validarToken(): Observable<any>{
     const token = localStorage.getItem('token') || '';
     return this.http.get(`${base_url}/auth`, {

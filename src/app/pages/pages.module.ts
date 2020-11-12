@@ -10,6 +10,7 @@ import { SemaforosComponent } from './semaforos/semaforos.component';
 import { NuevoSemaforoComponent } from './semaforos/nuevo-semaforo.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditarSemaforoComponent } from './semaforos/editar-semaforo.component';
+import { NuevoUsuarioComponent } from './usuarios/nuevo-usuario.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { EditarSemaforoComponent } from './semaforos/editar-semaforo.component';
     UsuariosComponent,
     SemaforosComponent,
     NuevoSemaforoComponent,
-    EditarSemaforoComponent
+    EditarSemaforoComponent,
+    NuevoUsuarioComponent
   ],
   imports: [
     CommonModule,
