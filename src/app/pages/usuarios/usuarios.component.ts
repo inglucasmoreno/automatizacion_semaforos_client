@@ -13,8 +13,9 @@ export class UsuariosComponent implements OnInit {
 
   public usuarios: Usuario[];
   public total = 0;
+  public limit = 5;
   public desde = 0;
-  public hasta = 0;
+  public hasta = 5;
 
   constructor(private usuariosService: UsuariosService) { }
 
@@ -23,7 +24,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   listarUsuarios(): void {
-    this.usuariosService.listarUsuarios().subscribe( resp => {
+    this.usuariosService.listarUsuarios(this.limit, this.desde).subscribe( resp => {
       const { usuarios, total } = resp;
       this.usuarios = usuarios;
       this.total = total;
@@ -49,6 +50,26 @@ export class UsuariosComponent implements OnInit {
         confirmButtonText: 'Entendido'
       });
     });
+  }
+
+  actualizarDesdeHasta(selector): void {
+
+    if (selector === 'siguiente'){ // Incrementar
+      if (this.hasta < this.total){
+        this.desde += this.limit;
+        this.hasta += this.limit;
+      }
+    }else{                         // Decrementar
+      this.desde -= this.limit;
+      if (this.desde < 0){
+        this.desde = 0;
+      }else{
+        this.hasta -= this.limit;
+      }
+    }
+
+    this.listarUsuarios();
+
   }
 
 }

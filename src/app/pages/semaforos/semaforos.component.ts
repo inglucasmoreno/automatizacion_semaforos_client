@@ -16,7 +16,6 @@ export class SemaforosComponent implements OnInit {
   public limit = 5;
   public desde = 0;
   public hasta = 5;
-  public hastaReal = 5;
 
   constructor(private semaforosService: SemaforosService) { }
 

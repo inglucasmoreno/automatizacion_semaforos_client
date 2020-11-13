@@ -11,13 +11,24 @@
                   autocomplete="off"
                   [formGroup]="usuarioForm"
                   (submit)="nuevoUsuario()">
-                <div>
-                    <label class="font-semibold text-gray-700 block" for="dni"> DNI </label>
-                    <input type="text" 
-                           id="dni"
-                           class="shadow w-1/2 block p-1 mt-2 rounded border border-gray-400"
-                           formControlName="dni"
-                           placeholder="Usuario del sistema">
+                <div class="md:flex md:items-center md:justify-between">
+                    <div class="md:flex-grow">
+                        <label class="font-semibold text-gray-700 block mt-4" for="dni"> DNI </label>
+                        <input type="dni"
+                               id="dni"
+                               formControlName="dni" 
+                               class="shadow block w-full p-1 mt-2 rounded border border-gray-400"
+                               placeholder="Usuario del sistema"
+                               >
+                    </div>
+                    <div class="md:flex-grow">
+                        <label class="font-semibold text-gray-700 block md:ml-2 mt-4" for="email"> Email </label>
+                        <input type="email"
+                               id="email"
+                               formControlName="email" 
+                               class="shadow block md:ml-2 w-full p-1 mt-2 rounded border border-gray-400"
+                               >
+                    </div>
                 </div>
                 <div class="md:flex md:items-center md:justify-between">
                     <div class="md:flex-grow">
@@ -33,6 +44,24 @@
                         <input type="text"
                                id="nombre"
                                formControlName="nombre" 
+                               class="shadow block md:ml-2 w-full p-1 mt-2 rounded border border-gray-400"
+                               >
+                    </div>
+                </div>
+                <div class="md:flex md:items-center md:justify-between">
+                    <div class="md:flex-grow">
+                        <label class="font-semibold text-gray-700 block mt-4" for="password"> Contraseña </label>
+                        <input type="password"
+                               id="password"
+                               formControlName="password" 
+                               class="shadow block w-full p-1 mt-2 rounded border border-gray-400"
+                               >
+                    </div>
+                    <div class="md:flex-grow">
+                        <label class="font-semibold text-gray-700 block md:ml-2 mt-4" for="repetir"> Repetir contraseña </label>
+                        <input type="password"
+                               id="repetir"
+                               formControlName="repetir" 
                                class="shadow block md:ml-2 w-full p-1 mt-2 rounded border border-gray-400"
                                >
                     </div>

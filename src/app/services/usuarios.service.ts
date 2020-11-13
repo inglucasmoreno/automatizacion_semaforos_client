@@ -6,6 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { LoginForm } from '../interfaces/login-form.interface';
 import { Usuario } from '../models/usuario.model';
 import { Router } from '@angular/router';
+import { stringify } from 'querystring';
 
 const base_url = environment.base_url;
 
@@ -33,10 +34,16 @@ export class UsuariosService {
     this.router.navigateByUrl('login');
   }
 
-  listarUsuarios(): Observable<any>{
-    return this.http.get(`${base_url}/usuarios`, { headers: {
+  listarUsuarios(limit = 0, desde = 0): Observable<any>{
+    return this.http.get(`${base_url}/usuarios`, { 
+      params: {
+        limit: String(limit),
+        desde: String(desde)
+      },
+      headers: {
       'x-token': localStorage.getItem('token')
-    }});
+      }
+    });
   }
 
   nuevoUsuario(data): Observable<any>{

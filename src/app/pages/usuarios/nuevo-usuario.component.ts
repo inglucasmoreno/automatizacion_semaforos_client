@@ -16,6 +16,9 @@ export class NuevoUsuarioComponent implements OnInit {
     dni: ['', Validators.required],
     apellido: ['', Validators.required],
     nombre: ['', Validators.required],
+    email: ['', Validators.email],
+    password: ['', Validators.required],
+    repetir: ['', Validators.required],
     role: ['USER_ROLE', Validators.required],
     activo: [true, Validators.required],
   });
@@ -32,8 +35,17 @@ export class NuevoUsuarioComponent implements OnInit {
   }
 
   nuevoUsuario(): void | boolean{
-    const {dni, apellido, nombre} = this.usuarioForm.value;
-    if (dni.trim() === '' || apellido.trim() === '' || nombre.trim() === ''){
+    const {dni, apellido, nombre, password, repetir, email} = this.usuarioForm.value;
+
+    // Se verifica que todos los campos esten rellenos
+    if (
+        dni.trim() === '' ||
+        apellido.trim() === '' ||
+        nombre.trim() === '' ||
+        email.trim() === ''  ||
+        password.trim() === '' ||
+        repetir.trim() === ''
+        ){
       Swal.fire({
         icon: 'info',
         title: 'Información',
@@ -42,6 +54,18 @@ export class NuevoUsuarioComponent implements OnInit {
       });
       return false;
     }
+
+    // Se verifica que los password sean iguales
+    if (password.trim() !== repetir.trim()){
+      Swal.fire({
+        icon: 'info',
+        title: 'Información',
+        text: 'Las contraseñas deben coincidir',
+        confirmButtonText: 'Entendido'
+      });
+      return false;
+    }
+
     this.usuariosService.nuevoUsuario(this.usuarioForm.value).subscribe( () => {
       Swal.fire({
         icon: 'success',
@@ -50,12 +74,11 @@ export class NuevoUsuarioComponent implements OnInit {
         confirmButtonText: 'Entendido'
       });
       this.router.navigateByUrl('/dashboard/usuarios');
-    }, (err) => {
-      console.log(err);
+    }, ({error}) => {
       Swal.fire({
         icon: 'info',
         title: 'Información',
-        text: '',
+        text: error.msg,
         confirmButtonText: 'Entendido'
       });
     });
