@@ -34,8 +34,18 @@ export class UsuariosService {
     this.router.navigateByUrl('login');
   }
 
+  getUsuario(id: string): Observable<any>{
+    return this.http.get(`${base_url}/usuarios/${id}`, {
+      headers: {
+        'x-token': localStorage.getItem('token')
+      }
+    }).pipe(
+      map( (resp: any) => resp.usuario)
+    );
+  }
+
   listarUsuarios(limit = 0, desde = 0): Observable<any>{
-    return this.http.get(`${base_url}/usuarios`, { 
+    return this.http.get(`${base_url}/usuarios`, {
       params: {
         limit: String(limit),
         desde: String(desde)
@@ -66,8 +76,8 @@ export class UsuariosService {
       }
     }).pipe(
       map( (resp: any) => {
-        const { dni, apellido, nombre, email, role, uid} = resp.usuario;
-        this.usuario = new Usuario(dni, apellido, nombre, email, role, uid);
+        const { dni, apellido, nombre, email, role, uid, activo} = resp.usuario;
+        this.usuario = new Usuario(uid, dni, apellido, nombre, email, role, activo);
         localStorage.setItem('token', resp.token);
         return true;
       }),

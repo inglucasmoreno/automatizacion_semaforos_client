@@ -1,6 +1,7 @@
 import { identifierModuleUrl } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from '../../services/usuarios.service';
+import { Usuario } from '../../models/usuario.model';
 
 @Component({
   selector: 'app-header',
@@ -11,10 +12,12 @@ import { UsuariosService } from '../../services/usuarios.service';
 export class HeaderComponent implements OnInit {
 
   showMenu = true;
+  usuario: Usuario;
 
   constructor(private usuariosService: UsuariosService) { }
 
   ngOnInit(): void {
+    this.usuario = this.usuariosService.usuario;
   }
 
   cerrarSesion(): void{

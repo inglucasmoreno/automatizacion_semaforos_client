@@ -13,7 +13,13 @@ import Swal from 'sweetalert2';
 })
 export class EditarSemaforoComponent implements OnInit {
 
-  public semaforoForm: FormGroup;
+  public semaforoForm = this.fb.group({
+    codigo: ['', Validators.required],
+    descripcion: ['', Validators.required],
+    intermitente: [false, Validators.required],
+    activo: [false, Validators.required]
+  });
+
   public semaforo: Semaforo = { _id: '', codigo: '' };
   private id: string;
 
@@ -27,23 +33,18 @@ export class EditarSemaforoComponent implements OnInit {
       this.id = id;
       this.getSamforo(id);
     });
-    this.semaforoForm = this.fb.group({
-      codigo: ['', Validators.required],
-      descripcion: ['', Validators.required],
-      intermitente: [false, Validators.required],
-      activo: [false, Validators.required]
-    });
   }
 
   getSamforo(id: string): void {
     this.semaforosService.getSemaforo(id).subscribe( semaforo => {
       this.semaforo = semaforo;
-      console.log(this.semaforo);
+      const { codigo, descripcion, intermitente, activo } = semaforo;
       this.semaforoForm.setValue({
-          codigo: this.semaforo.codigo,
-          descripcion: this.semaforo.descripcion,
-          intermitente: this.semaforo.intermitente,
-          activo: this.semaforo.activo});
+        codigo,
+        descripcion,
+        intermitente,
+        activo
+      });
     });
   }
 

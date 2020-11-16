@@ -10,14 +10,19 @@
   </div>
   <div *ngIf="showMenu" class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
     <div class="lg:block lg:flex-grow">
-      <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/dashboard" class="block lg:inline-block mt-4 lg:mt-0 text-blue-200 hover:text-white mr-4"> Tablero </a>
-      <a routerLinkActive="active" routerLink="/dashboard/usuarios" class="block lg:inline-block mt-4 lg:mt-0 text-blue-200 hover:text-white mr-4"> 
+      <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/dashboard" class="block lg:inline-block mt-4 lg:mt-0 text-blue-200 hover:text-white mr-4"> 
+        Tablero 
+      </a>
+      <a *ngIf="usuario.role === 'ADMIN_ROLE'" routerLinkActive="active" routerLink="/dashboard/usuarios" class="block lg:inline-block mt-4 lg:mt-0 text-blue-200 hover:text-white mr-4"> 
         Usuarios
       </a>
-      <a routerLinkActive="active" routerLink="/dashboard/semaforos" class="block lg:inline-block mt-4 lg:mt-0 text-blue-200 hover:text-white mr-4"> Semaforos </a>
+      <a *ngIf="usuario.role === 'ADMIN_ROLE'" routerLinkActive="active" routerLink="/dashboard/semaforos" class="block lg:inline-block mt-4 lg:mt-0 text-blue-200 hover:text-white mr-4"> 
+        Semaforos 
+      </a>
     </div>
+
     <div>
-      <button (click)="cerrarSesion()" class="mt-4 lg:mt-0 inline-block px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-blue-500 hover:bg-white"> Cerrar Sesion </button>
+      <button (click)="cerrarSesion()" class="mt-5 md:mt-0 shadow bg-blue bg-white rounded lg:mt-0 inline-block px-4 py-2 leading-none text-blue-500 font-semibold hover:border-transparent hover:bg-blue-100 focus:outline-none"> Cerrar Sesion </button>
     </div>
   </div>
 </nav>

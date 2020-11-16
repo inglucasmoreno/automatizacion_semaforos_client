@@ -4,9 +4,9 @@ export class Usuario {
         public dni: string,
         public apellido: string,
         public nombre: string,
-        public password: string,
         public email: string,
         public role?: string,
         public activo?: boolean,
+        public password?: string,
     ){}
 }

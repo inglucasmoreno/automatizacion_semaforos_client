@@ -11,6 +11,8 @@ import { SemaforosComponent } from './semaforos/semaforos.component';
 import { NuevoSemaforoComponent } from './semaforos/nuevo-semaforo.component';
 import { EditarSemaforoComponent } from './semaforos/editar-semaforo.component';
 import { NuevoUsuarioComponent } from './usuarios/nuevo-usuario.component';
+import { EditarUsuarioComponent } from './usuarios/editar-usuario.component';
+import { ActualizarPasswordUsuarioComponent } from './usuarios/actualizar-password-usuario.component';
 
 const routes: Routes = [
     {
@@ -20,9 +22,12 @@ const routes: Routes = [
             { path: '', canActivate: [AuthGuard], component: DashboardComponent },
             { path: 'usuarios', canActivate: [AuthGuard], component: UsuariosComponent },
             { path: 'usuarios/nuevo', canActivate: [AuthGuard], component: NuevoUsuarioComponent },
+            { path: 'usuarios/editar/:id', canActivate: [AuthGuard], component: EditarUsuarioComponent },
+            { path: 'usuarios/password/:id', canActivate: [AuthGuard], component: ActualizarPasswordUsuarioComponent },
             { path: 'semaforos', canActivate: [AuthGuard], component: SemaforosComponent },
             { path: 'semaforos/nuevo', canActivate: [AuthGuard], component: NuevoSemaforoComponent },
             { path: 'semaforos/editar/:id', canActivate: [AuthGuard], component: EditarSemaforoComponent },
+    
         ]
     },
 ];

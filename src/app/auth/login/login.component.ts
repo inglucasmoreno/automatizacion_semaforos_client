@@ -40,8 +40,13 @@ export class LoginComponent implements OnInit {
 
     this.usuariosService.login(this.loginForm.value).subscribe( resp => {
       this.router.navigateByUrl('dashboard');
-    }, (err) => {
-      Swal.fire('Error', err.error.msg, 'error');
+    }, ({error}) => {
+      Swal.fire({
+        icon: 'info',
+        title: 'Información',
+        text: error.msg,
+        confirmButtonText: 'Entendido'
+      });
     });
   }
 

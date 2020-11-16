@@ -40,16 +40,35 @@ export class UsuariosComponent implements OnInit {
 
   actualizarEstado(usuario: Usuario): void {
     const { uid, activo } = usuario;
-    this.usuariosService.actualizarUsuario(uid, {activo: !activo}).subscribe(resp => {
-      this.listarUsuarios();
-    }, ({error}) => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: error.msg,
-        confirmButtonText: 'Entendido'
-      });
+    Swal.fire({
+      title: '¿Estas seguro?',
+      text: `¿Quieres actualizar el estado de ${usuario.nombre}?`,
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Si, estoy seguro',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.usuariosService.actualizarUsuario(uid, {activo: !activo}).subscribe(resp => {
+          this.listarUsuarios();
+          Swal.fire({
+            icon: 'success',
+            title: 'Completado',
+            text: `Has actualizado el estado de ${usuario.nombre}`,
+            confirmButtonText: 'Entendido'
+          });
+        }, ({error}) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: error.msg,
+            confirmButtonText: 'Entendido'
+          });
+        });
+      }
     });
+
+
   }
 
   actualizarDesdeHasta(selector): void {
