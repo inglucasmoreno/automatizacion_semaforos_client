@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Semaforo } from '../../models/semaforo.model';
 import { SemaforosService } from '../../services/semaforos.service';
 import Swal from 'sweetalert2';
+import { WebsocketService } from '../../services/websocket.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,10 +17,20 @@ export class DashboardComponent implements OnInit {
   public dosFilas = false;
   public tresFilas = false;
 
-  constructor(private semaforosService: SemaforosService) { }
+  constructor(private semaforosService: SemaforosService,
+              private webSocketService: WebsocketService) { }
 
   ngOnInit(): void {
     this.listarSemaforos();
+    // Se espera codigo desde el topico intermitencia
+    this.webSocketService.listen('intermitencia').subscribe(direccion => {
+      this.listarSemaforos();
+      Swal.fire({
+        icon: 'warning',
+        title: 'Atención',
+        text: `Semáforo ${direccion} intermitente!`
+      });
+    });
   }
 
   listarSemaforos(): void{
