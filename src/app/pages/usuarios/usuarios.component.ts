@@ -16,6 +16,8 @@ export class UsuariosComponent implements OnInit {
   public limit = 5;
   public desde = 0;
   public hasta = 5;
+  public filtroActivo = '';
+  public filtroDni = '';
 
   constructor(private usuariosService: UsuariosService) { }
 
@@ -24,7 +26,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   listarUsuarios(): void {
-    this.usuariosService.listarUsuarios(this.limit, this.desde).subscribe( resp => {
+    this.usuariosService.listarUsuarios(this.limit, this.desde, this.filtroActivo, this.filtroDni).subscribe( resp => {
       const { usuarios, total } = resp;
       this.usuarios = usuarios;
       this.total = total;
@@ -89,6 +91,16 @@ export class UsuariosComponent implements OnInit {
 
     this.listarUsuarios();
 
+  }
+
+  filtrarActivos(activo: any): void{
+    this.filtroActivo = activo;
+    this.listarUsuarios();
+  }
+
+  filtrarDni(dni: string): void{
+    this.filtroDni = dni;
+    this.listarUsuarios();
   }
 
 }

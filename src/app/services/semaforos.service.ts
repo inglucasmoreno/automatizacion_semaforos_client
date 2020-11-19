@@ -20,11 +20,14 @@ export class SemaforosService {
     );
   }
 
-  listarSemaforos(limit = 0, desde = 0): Observable<any>{
+  listarSemaforos(limit = 0, desde = 0, activo = '', intermitente = '', descripcion = ''): Observable<any>{
     return this.http.get(`${base_url}/semaforos`, {
       params: {
         desde: String(desde),
-        limit: String(limit)
+        limit: String(limit),
+        activo,
+        intermitente,
+        descripcion
       },
       headers: {
         'x-token': localStorage.getItem('token')

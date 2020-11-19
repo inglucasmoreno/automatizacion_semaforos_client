@@ -16,6 +16,9 @@ export class SemaforosComponent implements OnInit {
   public limit = 5;
   public desde = 0;
   public hasta = 5;
+  public filtroActivos: any = '';
+  public filtroIntermitentes: any = '';
+  public filtroDescripcion: any = '';
 
   constructor(private semaforosService: SemaforosService) { }
 
@@ -24,7 +27,11 @@ export class SemaforosComponent implements OnInit {
   }
 
   listarSemaforos(): void{
-    this.semaforosService.listarSemaforos(this.limit, this.desde).subscribe( resp => {
+    this.semaforosService.listarSemaforos(this.limit,
+                                          this.desde,
+                                          this.filtroActivos,
+                                          this.filtroIntermitentes,
+                                          this.filtroDescripcion).subscribe( resp => {
       this.semaforos = resp.semaforos;
       this.total = resp.total;
     });
@@ -90,6 +97,21 @@ export class SemaforosComponent implements OnInit {
       }
     }
 
+    this.listarSemaforos();
+  }
+
+  filtradoPorLista(criterio: string): void {
+    this.filtroActivos = '';
+    this.filtroIntermitentes = '';
+    if (criterio === 'activos') { this.filtroActivos = true; }
+    else if (criterio === 'inactivos') { this.filtroActivos = false; }
+    else if (criterio === 'funcionando') { this.filtroIntermitentes = false; }
+    else if (criterio === 'intermitentes') { this.filtroIntermitentes = true; }
+    this.listarSemaforos();
+  }
+
+  filtradoPorDescripcion(descripcion: string): void {
+    this.filtroDescripcion = descripcion;
     this.listarSemaforos();
   }
 

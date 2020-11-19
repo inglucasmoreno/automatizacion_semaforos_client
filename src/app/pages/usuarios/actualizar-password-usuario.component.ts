@@ -14,7 +14,13 @@ import { Usuario } from '../../models/usuario.model';
 export class ActualizarPasswordUsuarioComponent implements OnInit {
 
   public id: string;
-  public usuario: Usuario;
+  public usuario: Usuario = {
+    uid: '',
+    dni: '',
+    apellido: '',
+    nombre: '',
+    email: '',
+  };
   public passwordForm = this.fb.group({
     password: ['', Validators.required],
     repetir: ['', Validators.required]

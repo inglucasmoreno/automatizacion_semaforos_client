@@ -36,7 +36,6 @@ export class DashboardComponent implements OnInit {
   listarSemaforos(): void{
     this.semaforosService.listarSemaforos().subscribe( resp => {
       this.semaforos = resp.semaforos.filter(semaforos => semaforos.activo === true);
-      console.log(this.semaforos);
     });
   }
 
