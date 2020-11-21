@@ -1,20 +1,53 @@
 <div class="mt-4">
-    <div class="hidden md:flex text-sm items-center font-semibold text-gray-600 justify-between bg-white w-11/12 md:w-1/3 mr-auto ml-auto p-3 shadow">
-        <span (click)="cambiarFilas(2)"
-              [ngClass]="{'bg-blue-500 text-white' : dosFilas}"
-              class="block border rounded shadow px-5 py-2 cursor-pointer"> 2 Filas </span>
-        <span (click)="cambiarFilas(3)"
-              [ngClass]="{'bg-blue-500 text-white' : tresFilas}"
-              class="block border rounded shadow px-5 py-2 cursor-pointer"> 3 Filas </span>
-        <span (click)="cambiarFilas(4)"
-              [ngClass]="{'bg-blue-500 text-white' : cuatroFilas}"
-              class="block border rounded shadow px-5 py-2 cursor-pointer"> 4 Filas </span>    
+    <div class="block animate__animated animate__fadeInUp bg-white w-11/12 md:w-1/3 mr-auto ml-auto p-3 shadow border border-gray-400">
+        <div class="flex items-center justify-between">
+            <h1 class="text-xl text-gray-700">
+                <span class="font-semibold"> Filtros </span>
+                <span class="text-sm text-gray-500"> 
+                    <span *ngIf="descripcion"> (Descripción: {{ descripcion }} ) </span>
+                    {{ intermitente === 'true' ? '(Estado: Intermitentes)' : null }} 
+                    {{ intermitente === 'false' ? '(Estado: Funcionando)' : null }} 
+                </span>
+            </h1>
+            <button (click)="visionFiltro()"
+                    class="border border-gray-400 bg-gray-300 shadow p-2 rounded text-gray-700 font-semibold text-sm focus:outline-none"> 
+                    <svg *ngIf="!mostrarFiltros" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <svg *ngIf="mostrarFiltros" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>    
+                </button>
+        </div>
+        <div [ngClass]="{'hidden': !mostrarFiltros}">
+            <div class="flex mt-2 items-center justify-between">
+                <input  #txtDescripcion
+                        (keyup)="filtradoDescripcion(txtDescripcion.value)"
+                        placeholder="Descripción"
+                        type="text" 
+                        class="shadow rounded p-2 border w-1/2">
+                <select #txtItermitente
+                        (change)="filtradoLista(txtItermitente.value)"
+                        class="w-1/2 shadow border p-2 ml-2">
+                    <option value=""> Todos los semáforos </option>
+                    <option value=false> Funcionando </option>
+                    <option value=true> Intermitentes </option>
+                </select>
+            </div>   
+            <div class="hidden md:flex mt-4 text-sm items-center font-semibold text-gray-600 justify-between">
+                <span (click)="cambiarFilas(2)"
+                        [ngClass]="{'bg-gray-300 border-gray-500 text-gray-700' : dosFilas}"
+                        class="block border rounded shadow px-5 py-2 cursor-pointer"> 2 Filas </span>
+                <span (click)="cambiarFilas(3)"
+                        [ngClass]="{'bg-gray-300 border-gray-500 text-gray-700' : tresFilas}"
+                        class="block border rounded shadow px-5 py-2 cursor-pointer"> 3 Filas </span>
+                <span (click)="cambiarFilas(4)"
+                        [ngClass]="{'bg-gray-300 border-gray-500 text-gray-700' : cuatroFilas}"
+                        class="block border rounded px-5 py-2 cursor-pointer"> 4 Filas </span>    
+            </div>
+        </div>
     </div>
     <div class="flex flex-wrap justify-center md:justify-start md:mx-10 mt-2">
         <div [ngClass]="{'md:w-1/2' : dosFilas, 'md:w-1/3' : tresFilas, 'md:w-1/4' : cuatroFilas}"
              (click)="cambiarEstado(semaforo)" 
              *ngFor="let semaforo of semaforos" 
-             class="w-11/12">
+             class="w-11/12 animate__animated animate__fadeInUp">
             <div [ngClass]="{'border-green-400' : !semaforo.intermitente, 'border-red-400' : semaforo.intermitente}"
             class="flex py-6 cursor-pointer items-center justify-between rounded shadow m-2 p-4 bg-white border-t-8">
                 <div>
